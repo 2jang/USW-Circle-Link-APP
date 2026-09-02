@@ -42,6 +42,10 @@ jobs:
       - name: Build Flutter web
         run: flutter build web --release --source-maps --dart-define=SENTRY_RELEASE=usw_circle_link@${{ steps.version.outputs.version }}
 
+      # 배포 브랜치(main)에도 README가 유지되도록 산출물에 포함
+      - name: Include README in web artifact
+        run: cp README.md build/web/README.md
+
       - name: Verify source maps
         run: |
           echo "Checking for source map files..."
